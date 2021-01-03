@@ -11,6 +11,8 @@ import tensorflow as tf
 from tensorflow.keras import models
 import numpy as np
 
+from stockfish import Stockfish
+
 from constants import (
     TILES_DIR, NN_MODEL_PATH, FEN_CHARS, USE_GRAYSCALE, DETECT_CORNERS
 )
@@ -56,19 +58,11 @@ def _save_output_html(chessboard_img_path, fen, predictions, confidence):
     html += '<img src="{}" />'.format(chessboard_img_path)
     html += '<img src="http://www.fen-to-image.com/image/32/{}"/>'.format(fen)
     html += '<div class="predictions-matrix">'
-    for i in range(8):
-        html += '<div>'
-        for j in range(8):
-            c = predictions[i*8 + j]
-            html += '<div class="prediction" style="color: {}">{}</div>'.format(
-                _confidence_color(c),
-                format(c, '.3f')
-            )
-        html += '</div>'
+    
     html += '</div>'
     html += '</div>'
     html += '<br />'
-    html += '<a href="https://lichess.org/editor/{}" target="_blank">{}</a>'.format(
+    html += '<a href="https://lichess.org/analysis/{}" target="_blank">{}</a>'.format(
         fen, fen
     )
     html += '<div style="color: {}">{}</div>'.format(confidence_color, confidence)
