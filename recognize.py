@@ -95,7 +95,7 @@ def predict_chessboard(chessboard_img_path, options={}):
         confidence = reduce(lambda x,y: x*y, [p[1] for p in predictions])
         print("Confidence: {}".format(confidence))
     # if options.debug:
-    print("https://lichess.org/editor/{}".format(predicted_fen))
+    print("https://lichess.org/analysis/{}".format(predicted_fen))
     _save_output_html(chessboard_img_path, predicted_fen, [p[1] for p in predictions], confidence)
     print("Saved {} prediction to {}".format(chessboard_img_path, OUT_FILE))
     return predicted_fen
